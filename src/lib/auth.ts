@@ -4,7 +4,7 @@ import { User } from "./types";
 export async function validateRequest(): Promise<SessionValidation> {
   const sessionToken = await getSessionToken();
   if (!sessionToken) {
-    return { user: null };
+    return { user: null, token: null };
   }
   return validateSessionToken(sessionToken);
 }
@@ -18,14 +18,14 @@ export async function validateSessionToken(
     },
   });
 
-  console.log(response);
-
   if (!response.ok) {
-    return { user: null };
+    return { user: null, token: null };
   }
 
   const result = await response.json();
-  return { user: result.data };
+  return { user: result.data, token };
 }
 
-export type SessionValidation = { user: User } | { user: null };
+export type SessionValidation =
+  | { user: User; token: string }
+  | { user: null; token: null };
