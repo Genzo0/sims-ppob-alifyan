@@ -5,6 +5,7 @@ import { createContext, useContext } from "react";
 
 interface SessionContext {
   user: User;
+  token: string;
 }
 
 const SessionContext = createContext<SessionContext | null>(null);
