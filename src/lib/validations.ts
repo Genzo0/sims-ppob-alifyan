@@ -31,3 +31,14 @@ export const registerSchema = z
   });
 
 export type RegisterValues = z.infer<typeof registerSchema>;
+
+export const topupSchema = z.object({
+  nominal: z
+    .number()
+    .int()
+    .positive({ message: "Nominal tidak boleh 0" })
+    .min(10000, { message: "Nominal minimal Rp 10.000" })
+    .max(1000000, { message: "Nominal maksimal Rp 1.000.000" }),
+});
+
+export type TopupValues = z.infer<typeof topupSchema>;

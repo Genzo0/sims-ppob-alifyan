@@ -7,8 +7,8 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | SIMS PPOB - Muhammad Alifyan Satrio Nugroho",
-    absolute: "SIMS PPOB - Muhammad Alifyan Satrio Nugroho",
+    template: "%s | SIMS PPOB",
+    absolute: "SIMS PPOB",
   },
   description:
     "Bayar tagihan listrik, pulsa, dan lainnya dengan mudah dan cepat di SIMS PPOB. Ayo, mulai bayar tagihanmu sekarang!",

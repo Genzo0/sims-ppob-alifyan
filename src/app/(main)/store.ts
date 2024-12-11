@@ -1,4 +1,5 @@
 import { Balance } from "@/lib/types";
+import { TopupValues } from "@/lib/validations";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const balanceApi = (token: string) =>
@@ -21,6 +22,23 @@ export const balanceApi = (token: string) =>
           return response.data;
         },
         providesTags: ["Balance"],
+      }),
+      topUpBalance: builder.mutation<TopupValues, TopupValues>({
+        query: (data) => ({
+          url: "/topup",
+          method: "POST",
+          body: {
+            top_up_amount: data.nominal,
+          },
+        }),
+        transformResponse: (response: {
+          success: string;
+          data: TopupValues;
+          message: string;
+        }) => {
+          return response.data;
+        },
+        invalidatesTags: ["Balance"],
       }),
     }),
   });

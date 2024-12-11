@@ -5,6 +5,12 @@ import Balance from "./Balance";
 import { getSessionToken } from "@/lib/sessions";
 import { Service } from "@/lib/types";
 import Banners from "./Banners";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Dashboard",
+  description: "Dashboard SIMS PPOB",
+};
 
 export default async function Page() {
   const token = await getSessionToken();
@@ -38,7 +44,7 @@ export default async function Page() {
   );
 }
 
-async function Profile() {
+export async function Profile() {
   const { user } = await validateRequest();
   return (
     <div className="flex w-2/5 flex-col justify-between">
