@@ -3,6 +3,7 @@
 import { Banner } from "@/lib/types";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
+import Image from "next/image";
 
 export default function Banners({ banners }: { banners: Banner[] }) {
   return (
@@ -16,7 +17,13 @@ export default function Banners({ banners }: { banners: Banner[] }) {
       >
         {banners.map((banner: Banner) => (
           <SwiperSlide key={banner.banner_name}>
-            <img src={banner.banner_image} alt="" />
+            <Image
+              src={banner.banner_image}
+              alt=""
+              width={100}
+              height={100}
+              className="w-full"
+            />
           </SwiperSlide>
         ))}
       </Swiper>

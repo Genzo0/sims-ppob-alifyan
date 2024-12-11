@@ -22,6 +22,7 @@ import { login } from "./actions";
 import { useToast } from "@/hooks/use-toast";
 
 export default function LoginForm() {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [error, setError] = useState<string>();
   const [isPending, startTransition] = useTransition();
 
