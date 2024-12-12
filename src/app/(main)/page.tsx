@@ -13,25 +13,6 @@ export const metadata: Metadata = {
 };
 
 export default async function Page() {
-  const token = await getSessionToken();
-
-  const getBanners = async () => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/banner`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-
-    if (!res.ok) {
-      return [];
-    }
-
-    const result = await res.json();
-
-    return result.data;
-  };
-
-  const banners = await getBanners();
   return (
     <main className="w-full space-y-16 py-5">
       <div className="flex">
@@ -39,7 +20,7 @@ export default async function Page() {
         <Balance />
       </div>
       <Services />
-      <Banners banners={banners} />
+      <Banners />
     </main>
   );
 }

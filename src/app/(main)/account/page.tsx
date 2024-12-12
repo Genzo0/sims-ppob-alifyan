@@ -1,4 +1,9 @@
+import { Metadata } from "next";
 import AccountForm from "./AccountForm";
+
+export const metadata: Metadata = {
+  title: "Account",
+};
 
 export default async function Page() {
   return (

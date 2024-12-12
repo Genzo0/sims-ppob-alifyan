@@ -1,6 +1,11 @@
 import Profile from "@/components/Profile";
 import Balance from "../Balance";
 import TransactionList from "./TransactionList";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Transaction",
+};
 
 export default function Page() {
   return (
