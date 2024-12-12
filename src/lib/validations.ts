@@ -42,3 +42,9 @@ export const topupSchema = z.object({
 });
 
 export type TopupValues = z.infer<typeof topupSchema>;
+
+export const buySchema = z.object({
+  code: z.string(),
+});
+
+export type BuyValues = z.infer<typeof buySchema>;

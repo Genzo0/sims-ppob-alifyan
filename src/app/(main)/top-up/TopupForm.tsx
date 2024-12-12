@@ -1,7 +1,6 @@
 "use client";
 
 import { CurrencyInput } from "@/components/CurrencyInput";
-import LoadingButton from "@/components/LoadingButton";
 import {
   Form,
   FormControl,
@@ -12,17 +11,12 @@ import {
 import { formatCurrency } from "@/lib/utils";
 import { topupSchema, TopupValues } from "@/lib/validations";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm, UseFormReturn } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { balanceApi } from "../store";
 import { useSession } from "../SessionProvider";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
-import Image from "next/image";
-import logo from "@/assets/logo.png";
-import { DialogTitle } from "@radix-ui/react-dialog";
-import { CircleCheck, CircleX } from "lucide-react";
-import { useRouter } from "next/navigation";
+import ReminderDialog from "@/components/ReminderDialog";
 
 export default function TopupForm() {
   const [clicked, setClicked] = useState(false);
@@ -80,11 +74,12 @@ export default function TopupForm() {
           <ReminderDialog
             open={showDialog}
             onOpenChange={setShowDialog}
-            form={form}
+            price={form.getValues("nominal")}
             isError={isError}
             isLoading={isLoading}
             isSuccess={isSuccess}
             onSubmit={form.handleSubmit(onSubmit)}
+            type="topup"
           />
         </form>
       </Form>
@@ -104,168 +99,6 @@ export default function TopupForm() {
         ))}
       </div>
     </div>
-  );
-}
-
-interface ReminderDialogProps {
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
-  form: UseFormReturn<TopupValues>;
-  isLoading: boolean;
-  isSuccess: boolean;
-  isError: boolean;
-  onSubmit: () => void;
-}
-
-function ReminderDialog({
-  open,
-  onOpenChange,
-  form,
-  isLoading,
-  isError,
-  isSuccess,
-  onSubmit,
-}: ReminderDialogProps) {
-  const [showSuccess, setShowSuccess] = useState(false);
-  const [showError, setShowError] = useState(false);
-
-  useEffect(() => {
-    if (isSuccess) {
-      setShowSuccess(true);
-      onOpenChange(false);
-    }
-    if (isError) {
-      setShowError(true);
-      onOpenChange(false);
-    }
-  }, [isSuccess, isError, onOpenChange]);
-
-  return (
-    <>
-      <Dialog open={open} onOpenChange={onOpenChange}>
-        <DialogContent className="mx-auto flex w-full flex-col items-center justify-center space-y-3">
-          <DialogTitle>
-            <Image
-              src={logo}
-              alt=""
-              width={100}
-              height={100}
-              className="size-10"
-            />
-          </DialogTitle>
-          <form
-            className="mx-auto w-full space-y-3 text-center"
-            onSubmit={onSubmit}
-          >
-            <div className="space-y-1 text-center">
-              <p>Anda yakin untuk Top Up sebesar</p>
-              <p className="text-xl font-bold">
-                {formatCurrency(form.getValues("nominal"), true)}
-              </p>
-            </div>
-            <LoadingButton
-              loading={isLoading}
-              className="mx-auto font-medium text-primary shadow-none"
-              variant="ghost"
-              type="submit"
-            >
-              Ya, lanjutkan top up
-            </LoadingButton>
-            <Button
-              variant="ghost"
-              className="text-foreground/70"
-              type="button"
-              onClick={() => onOpenChange(false)}
-            >
-              Batalkan
-            </Button>
-          </form>
-        </DialogContent>
-      </Dialog>
-      <SuccessDialog
-        open={isSuccess && showSuccess}
-        onOpenChange={setShowSuccess}
-        form={form}
-      />
-      <ErrorDialog
-        open={isError && showError}
-        onOpenChange={setShowError}
-        form={form}
-      />
-    </>
-  );
-}
-
-interface SuccessDialogProps {
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
-  form: UseFormReturn<TopupValues>;
-}
-
-function SuccessDialog({ open, onOpenChange, form }: SuccessDialogProps) {
-  const router = useRouter();
-  return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent>
-        <DialogTitle>
-          <CircleCheck className="mx-auto size-20 rounded-full bg-green-600 text-white" />
-        </DialogTitle>
-        <div className="space-y-1 text-center">
-          <p>Top Up sebesar</p>
-          <p className="text-xl font-bold">
-            {formatCurrency(form.getValues("nominal"), true)}
-          </p>
-        </div>
-        <Button
-          variant="ghost"
-          className="text-primary"
-          type="button"
-          onClick={() => {
-            onOpenChange(false);
-            router.push("/");
-          }}
-        >
-          Kembali ke beranda
-        </Button>
-      </DialogContent>
-    </Dialog>
-  );
-}
-
-interface ErrorDialogProps {
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
-  form: UseFormReturn<TopupValues>;
-}
-
-function ErrorDialog({ open, onOpenChange, form }: ErrorDialogProps) {
-  const router = useRouter();
-  return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent>
-        <DialogTitle>
-          <CircleX className="mx-auto size-20 rounded-full bg-red-600 text-white" />
-        </DialogTitle>
-        <div className="space-y-1 text-center">
-          <p>Top Up sebesar</p>
-          <p className="text-xl font-bold">
-            {formatCurrency(form.getValues("nominal"), true)}
-          </p>
-          <p>Gagal</p>
-        </div>
-        <Button
-          variant="ghost"
-          className="text-primary"
-          type="button"
-          onClick={() => {
-            onOpenChange(false);
-            router.push("/");
-          }}
-        >
-          Kembali ke beranda
-        </Button>
-      </DialogContent>
-    </Dialog>
   );
 }
 

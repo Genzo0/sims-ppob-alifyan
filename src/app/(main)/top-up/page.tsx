@@ -1,6 +1,12 @@
+import { Metadata } from "next";
 import Balance from "../Balance";
-import { Profile } from "../page";
 import TopupForm from "./TopupForm";
+import Profile from "@/components/Profile";
+
+export const metadata: Metadata = {
+  title: "Top Up",
+  description: "Top Up SIMS PPOB",
+};
 
 export default function Page() {
   return (
@@ -10,8 +16,8 @@ export default function Page() {
         <Balance />
       </div>
       <div>
-        <p className="text-2xl">Silahkan masukan</p>
-        <p className="text-3xl font-semibold tracking-wide">Nominal Top Up</p>
+        <p className="text-xl">Silahkan masukan</p>
+        <p className="text-2xl font-semibold tracking-wide">Nominal Top Up</p>
       </div>
       <TopupForm />
     </main>
