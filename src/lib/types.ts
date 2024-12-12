@@ -21,3 +21,21 @@ export interface Banner {
   banner_image: string;
   description: string;
 }
+
+export interface Transaction {
+  invoice_number: string;
+  transaction_type: string;
+  description: string;
+  total_amount: number;
+  created_on: string;
+}
+
+export interface TransactionApiResponse {
+  status: string;
+  message: string;
+  data: {
+    offset: number;
+    limit: number;
+    records: Transaction[];
+  };
+}

@@ -2,7 +2,7 @@ import { validateRequest } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import SessionProvider from "./SessionProvider";
 import Navbar from "./Navbar";
-import DashboardProvider from "./DashboardProvider";
+import ReduxProvider from "./ReduxProvider";
 
 export default async function Layout({
   children,
@@ -15,12 +15,12 @@ export default async function Layout({
 
   return (
     <SessionProvider value={session}>
-      <DashboardProvider>
+      <ReduxProvider>
         <div className="flex min-h-screen flex-col">
           <Navbar />
           <div className="mx-auto w-full max-w-7xl p-5">{children}</div>
         </div>
-      </DashboardProvider>
+      </ReduxProvider>
     </SessionProvider>
   );
 }
