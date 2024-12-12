@@ -1,11 +1,11 @@
 import Image from "next/image";
-import profil from "@/assets/profil.png";
-import { validateRequest } from "@/lib/auth";
 import Balance from "./Balance";
 import { getSessionToken } from "@/lib/sessions";
 import { Service } from "@/lib/types";
 import Banners from "./Banners";
 import { Metadata } from "next";
+import Link from "next/link";
+import Profile from "@/components/Profile";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -44,27 +44,6 @@ export default async function Page() {
   );
 }
 
-export async function Profile() {
-  const { user } = await validateRequest();
-  return (
-    <div className="flex w-2/5 flex-col justify-between">
-      <Image
-        src={profil}
-        alt="profil"
-        width={100}
-        height={100}
-        className="size-20"
-      />
-      <div>
-        <p className="text-2xl">Selamat datang,</p>
-        <p className="text-3xl font-semibold tracking-wide">
-          {user?.first_name} {user?.last_name}
-        </p>
-      </div>
-    </div>
-  );
-}
-
 async function Services() {
   const token = await getSessionToken();
 
@@ -89,7 +68,12 @@ async function Services() {
   return (
     <div className="flex justify-between gap-3">
       {services.map((service) => (
-        <ServiceItem key={service.service_code} service={service} />
+        <Link
+          href={`/buy?service=${service.service_name}&price=${service.service_tariff}&icon=${service.service_icon}&code=${service.service_code}`}
+          key={service.service_code}
+        >
+          <ServiceItem service={service} />
+        </Link>
       ))}
     </div>
   );

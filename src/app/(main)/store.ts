@@ -1,5 +1,5 @@
 import { Balance } from "@/lib/types";
-import { TopupValues } from "@/lib/validations";
+import { BuyValues, TopupValues } from "@/lib/validations";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const balanceApi = (token: string) =>
@@ -34,6 +34,23 @@ export const balanceApi = (token: string) =>
         transformResponse: (response: {
           success: string;
           data: TopupValues;
+          message: string;
+        }) => {
+          return response.data;
+        },
+        invalidatesTags: ["Balance"],
+      }),
+      buyService: builder.mutation<BuyValues, BuyValues>({
+        query: (data) => ({
+          url: "/transaction",
+          method: "POST",
+          body: {
+            service_code: data.code,
+          },
+        }),
+        transformResponse: (response: {
+          status: string;
+          data: BuyValues;
           message: string;
         }) => {
           return response.data;

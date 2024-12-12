@@ -20,8 +20,8 @@ export default function Banners({ banners }: { banners: Banner[] }) {
             <Image
               src={banner.banner_image}
               alt=""
-              width={100}
-              height={100}
+              width={500}
+              height={500}
               className="w-full"
             />
           </SwiperSlide>
