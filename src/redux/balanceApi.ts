@@ -1,6 +1,7 @@
 import { Balance } from "@/lib/types";
 import { BuyValues, TopupValues } from "@/lib/validations";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { transactionApi } from "./TransactionApi";
 
 export const balanceApi = (token: string) =>
   createApi({
@@ -14,7 +15,7 @@ export const balanceApi = (token: string) =>
         return headers;
       },
     }),
-    tagTypes: ["Balance"],
+    tagTypes: ["Balance", "Transaction"],
     endpoints: (builder) => ({
       getBalance: builder.query<Balance, void>({
         query: () => "/balance",
@@ -38,7 +39,11 @@ export const balanceApi = (token: string) =>
         }) => {
           return response.data;
         },
-        invalidatesTags: ["Balance"],
+        invalidatesTags: ["Balance", "Transaction"],
+        async onQueryStarted(_, { dispatch, queryFulfilled }) {
+          await queryFulfilled;
+          dispatch(transactionApi(token).util.invalidateTags(["Transaction"]));
+        },
       }),
       buyService: builder.mutation<BuyValues, BuyValues>({
         query: (data) => ({
@@ -55,7 +60,11 @@ export const balanceApi = (token: string) =>
         }) => {
           return response.data;
         },
-        invalidatesTags: ["Balance"],
+        invalidatesTags: ["Balance", "Transaction"],
+        async onQueryStarted(_, { dispatch, queryFulfilled }) {
+          await queryFulfilled;
+          dispatch(transactionApi(token).util.invalidateTags(["Transaction"]));
+        },
       }),
     }),
   });

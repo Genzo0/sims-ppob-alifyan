@@ -4,9 +4,9 @@ import { formatCurrency } from "@/lib/utils";
 import { Eye, EyeOff } from "lucide-react";
 import Image from "next/image";
 import background from "@/assets/background_saldo.png";
-import { balanceApi } from "./store";
 import { useSession } from "./SessionProvider";
 import { useState } from "react";
+import { balanceApi } from "@/redux/balanceApi";
 
 export default function Balance() {
   const [showPassword, setShowPassword] = useState(false);

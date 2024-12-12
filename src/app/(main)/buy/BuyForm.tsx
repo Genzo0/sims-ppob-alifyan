@@ -13,10 +13,10 @@ import {
 import { buySchema, BuyValues } from "@/lib/validations";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { balanceApi } from "../store";
 import { useSession } from "../SessionProvider";
 import { useState } from "react";
 import { formatCurrency } from "@/lib/utils";
+import { balanceApi } from "@/redux/balanceApi";
 
 interface BuyFormProps {
   code: string;

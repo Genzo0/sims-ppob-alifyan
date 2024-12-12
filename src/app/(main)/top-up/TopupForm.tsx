@@ -12,11 +12,11 @@ import { formatCurrency } from "@/lib/utils";
 import { topupSchema, TopupValues } from "@/lib/validations";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { balanceApi } from "../store";
 import { useSession } from "../SessionProvider";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import ReminderDialog from "@/components/ReminderDialog";
+import { balanceApi } from "@/redux/balanceApi";
 
 export default function TopupForm() {
   const [clicked, setClicked] = useState(false);
