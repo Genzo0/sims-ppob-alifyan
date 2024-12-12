@@ -48,3 +48,14 @@ export const buySchema = z.object({
 });
 
 export type BuyValues = z.infer<typeof buySchema>;
+
+export const profileSchema = z.object({
+  email: z
+    .string()
+    .email({ message: "Format email salah" })
+    .min(1, { message: "Email tidak boleh kosong" }),
+  first_name: z.string().min(1, { message: "Nama depan tidak boleh kosong" }),
+  last_name: z.string().min(1, { message: "Nama belakang tidak boleh kosong" }),
+});
+
+export type ProfileValues = z.infer<typeof profileSchema>;
