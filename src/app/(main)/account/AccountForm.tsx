@@ -1,7 +1,7 @@
 "use client";
 
 import UserAvatar from "@/components/UserAvatar";
-import { AtSignIcon, Camera, Pencil, UserRound } from "lucide-react";
+import { AtSignIcon, Pencil, UserRound } from "lucide-react";
 import { useSession } from "../SessionProvider";
 import {
   Form,
@@ -33,6 +33,7 @@ export default function AccountForm() {
 
   const [isPending, startTransition] = useTransition();
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [error, setError] = useState<string>();
 
   const [croppedAvatar, setCroppedAvatar] = useState<Blob | null>(null);
