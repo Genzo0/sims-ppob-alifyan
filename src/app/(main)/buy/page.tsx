@@ -2,6 +2,11 @@ import Image from "next/image";
 import Balance from "../Balance";
 import BuyForm from "./BuyForm";
 import Profile from "@/components/Profile";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Buy",
+};
 
 interface PageProps {
   searchParams: Promise<{
