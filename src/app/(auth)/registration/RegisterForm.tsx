@@ -13,7 +13,7 @@ import {
   Form,
 } from "@/components/ui/form";
 import { IconInput } from "@/components/IconInput";
-import { AtSign, LockKeyhole } from "lucide-react";
+import { AtSign, LockKeyhole, UserCircle } from "lucide-react";
 import { PasswordInput } from "@/components/PasswordInput";
 import LoadingButton from "@/components/LoadingButton";
 import Link from "next/link";
@@ -100,7 +100,7 @@ export default function RegisterForm() {
               <FormItem>
                 <FormControl>
                   <IconInput
-                    icon={AtSign}
+                    icon={UserCircle}
                     {...field}
                     placeholder="nama depan"
                     className="h-12"
@@ -117,7 +117,7 @@ export default function RegisterForm() {
               <FormItem>
                 <FormControl>
                   <IconInput
-                    icon={AtSign}
+                    icon={UserCircle}
                     {...field}
                     placeholder="nama belakang"
                     className="h-12"
