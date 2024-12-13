@@ -162,7 +162,7 @@ export default function RegisterForm() {
             )}
           />
           <LoadingButton loading={isPending} className="h-12 w-full">
-            Masuk
+            Registrasi
           </LoadingButton>
         </form>
       </Form>
