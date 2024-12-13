@@ -114,7 +114,7 @@ export default function AccountForm() {
                 <FormLabel>Email</FormLabel>
                 <FormControl>
                   <IconInput
-                    className="w-full max-w-3xl disabled:opacity-100"
+                    className="h-12 w-full max-w-3xl disabled:opacity-100"
                     placeholder="email"
                     icon={AtSignIcon}
                     {...field}
@@ -133,7 +133,7 @@ export default function AccountForm() {
                 <FormLabel>Nama Depan</FormLabel>
                 <FormControl>
                   <IconInput
-                    className="w-full max-w-3xl disabled:opacity-100"
+                    className="h-12 w-full max-w-3xl disabled:opacity-100"
                     placeholder="nama depan"
                     icon={UserRound}
                     {...field}
@@ -152,7 +152,7 @@ export default function AccountForm() {
                 <FormLabel>Nama Belakang</FormLabel>
                 <FormControl>
                   <IconInput
-                    className="w-full max-w-3xl disabled:opacity-100"
+                    className="h-12 w-full max-w-3xl disabled:opacity-100"
                     placeholder="nama depan"
                     icon={UserRound}
                     {...field}
@@ -167,13 +167,13 @@ export default function AccountForm() {
             <LoadingButton
               loading={isPending}
               type="submit"
-              className="w-full max-w-3xl"
+              className="h-12 w-full max-w-3xl"
             >
               Simpan
             </LoadingButton>
           ) : (
             <Button
-              className="w-full max-w-3xl"
+              className="h-12 w-full max-w-3xl"
               onClick={() => setIsEditing(true)}
             >
               Edit Profile
@@ -192,7 +192,7 @@ export default function AccountForm() {
           variant="outline"
           type="submit"
           className={cn(
-            "mx-auto w-full max-w-3xl border-primary text-center text-primary",
+            "mx-auto h-12 w-full max-w-3xl border-primary text-center text-primary",
             {
               hidden: isEditing,
             },
