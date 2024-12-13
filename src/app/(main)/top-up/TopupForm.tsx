@@ -92,7 +92,7 @@ export default function TopupForm() {
               form.setValue("nominal", choice.value);
               setClicked(true);
             }}
-            className="h-12 bg-gray-100 hover:bg-gray-200"
+            className="h-12 bg-secondary hover:bg-secondary/30"
           >
             {formatCurrency(choice.value, true)}
           </button>
