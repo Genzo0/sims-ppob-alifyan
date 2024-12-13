@@ -4,6 +4,7 @@ import Image from "next/image";
 import logo from "@/assets/logo.png";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import ThemeToggle from "@/components/ThemeToggle";
 
 export const navItems = [
   { label: "Top Up", href: "/top-up" },
@@ -27,7 +28,9 @@ export default function Navbar() {
             <p className="text-lg font-semibold">SIMS PPOB</p>
           </div>
         </Link>
-        <ul className="flex gap-16 text-lg font-medium">
+        <ul className="flex items-center gap-16 text-lg font-medium">
+          <ThemeToggle />
+
           {navItems.map((item, i) => (
             <NavItem key={i} item={item} />
           ))}
